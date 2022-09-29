@@ -1,7 +1,6 @@
 .Table {
     width: 90%;
     height: 96%;
-    border: 2px solid purple;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,8 +8,8 @@
 
     >.section {
         height: 125px;
-        border: 1px solid white;
         display: flex;
+        gap: 2px;
         flex-direction: row;
     }
 }

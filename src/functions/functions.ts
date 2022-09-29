@@ -6,6 +6,9 @@ export const setUserAndCompCards = (allCards: ICard[], trump: ICard | null) => {
     console.log(trump);
     console.log(allCards);
     
+
+    console.log('s');
+    
     
     
     let arr: ICard[] = []

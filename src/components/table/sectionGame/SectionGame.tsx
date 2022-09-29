@@ -1,10 +1,13 @@
-import React from 'react'
+import SectionBito from './sectionBito/SectionBito'
 import SectionTrumps from './sectionTrumps/SectionTrumps'
+import SectionFight from './sectionFight/sectionFight'
 
 const SectionGame = () => {
   return (
     <div className='SectionGame'>
-        <SectionTrumps />
+      <SectionTrumps />
+      <SectionFight />
+      <SectionBito />
     </div>
   )
 }
