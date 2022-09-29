@@ -1,0 +1,21 @@
+.Card {
+    width: 90px;
+    height: 125px;
+    background-image: url('../../images/A-heart.png');
+    border: 1px solid rgb(70, 70, 70);
+    border-radius: 10px;
+    background-size: cover;
+    box-shadow: 0 0 10px rgba($color: black, $alpha: .1);
+}
+
+@keyframes anim {
+    0% {
+        top: 0;
+        left: 0;
+    }
+
+    100% {
+        top: 200px;
+        left: 700px;
+    }
+}

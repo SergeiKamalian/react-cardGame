@@ -1,0 +1,28 @@
+@import url('../components/card/Card.scss');
+@import url('../components/table/Table.scss');
+@import url('../components/table/sectionGame/SectionGame.scss');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.App {
+    width: 100%;
+    height: 100vh;
+    background-image: url('../images/table.jpg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pointer {
+    cursor: pointer;
+    transition: all .2s ease-in;
+
+    &:hover {
+        transform: translateY(-3px);
+    }
+}
