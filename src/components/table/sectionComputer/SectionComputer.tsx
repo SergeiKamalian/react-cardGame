@@ -7,7 +7,7 @@ const SectionComputer = () => {
 
     return (
         <div className='SectionComputer section'>
-            {computerCards.map((card) => <Card card={card} key={card.id} isBack={true} />)}
+            {computerCards.map((card, index) => <Card card={card} key={card.id} isBack={false} index={index} />)}
         </div>
     )
 }

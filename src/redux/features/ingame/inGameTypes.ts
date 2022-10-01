@@ -1,0 +1,1 @@
+export const SET_INTABLE_CARDS = 'SET_INTABLE_CARDS'

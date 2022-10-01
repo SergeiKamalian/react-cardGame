@@ -5,17 +5,19 @@ import { useCallback, useEffect } from 'react'
 import SectionComputer from './sectionComputer/SectionComputer'
 import SectionGame from './sectionGame/SectionGame'
 import SectionUser from './sectionUser/SectionUser'
-import { setGameTrump } from '../../redux/features/actions'
+import { setGameStarter, setGameTrump } from '../../redux/features/actions'
 import { setAllCards } from '../../redux/features/actions'
 import { setUserCards } from '../../redux/features/actions'
 import { setComputerCards } from '../../redux/features/actions'
 import { ICard } from '../../model'
-import { randomArr } from '../../functions/functions'
+import { decideAttacker, randomArr } from '../../functions/functions'
 
 const Table = () => {
-  const dispatch = useDispatch()
-  const { allCards } = useSelector((state: RootState) => state.cards)
-
+  const dispatch = useDispatch();
+  const { allCards } = useSelector((state: RootState) => state.cards);
+  const { userCards } = useSelector((state: RootState) => state.gameReducer);
+  const { computerCards } = useSelector((state: RootState) => state.gameReducer);
+  const { gameTrump } = useSelector((state: RootState) => state.gameReducer);
 
   const getGameTrump = useCallback(() => {
     const rand = Math.floor(Math.random() * allCards.length);
@@ -24,11 +26,11 @@ const Table = () => {
 
     dispatch(setGameTrump(gameTrumpEl))
     dispatch(setAllCards(allCards))
-  }, [])
+  }, [allCards, dispatch])
 
   const getCards = useCallback((dispatchValue: string) => {
     const cardsArr: ICard[] = []
-    allCards.forEach((card) => {
+    allCards.forEach(() => {
       if (cardsArr.length < 6) {
         const rand = Math.floor(Math.random() * allCards.length);
         const cardEl = allCards[rand]
@@ -48,16 +50,18 @@ const Table = () => {
       dispatch(setComputerCards(cardsArr))
       dispatch(setAllCards(allCards))
     }
-  }, [])
+  }, [allCards, dispatch])
 
   useEffect(() => {
     getGameTrump()
     getCards('user')
     getCards('computer')
     dispatch(setAllCards(randomArr(allCards)))
-  }, [dispatch])
+  }, [allCards, dispatch, getCards, getGameTrump])
 
-
+  useEffect(() => {
+    dispatch(setGameStarter(decideAttacker(userCards, computerCards, gameTrump)!))
+  }, [computerCards, dispatch, gameTrump, userCards])
 
 
   return (

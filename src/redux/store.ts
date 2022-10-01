@@ -2,9 +2,11 @@ import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
 import cards from "./features/cards/cardsReducer";
 import gameReducer from "./features/game/gameReducer";
+import inGameReducer from "./features/ingame/inGameReducer";
 const reducers = combineReducers({
     cards,
-    gameReducer
+    gameReducer,
+    inGameReducer
 });
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

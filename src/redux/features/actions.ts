@@ -1,6 +1,6 @@
 import { ICard } from "../../model";
 import { SET_ALL_CARDS } from "./cards/cardsTypes";
-import { SET_NOBITO_CARDS, SET_COMPUTER_CARDS, SET_GAME_TRUMP, SET_USER_CARDS } from "./game/gameTypes";
+import { SET_NOBITO_CARDS, SET_COMPUTER_CARDS, SET_GAME_TRUMP, SET_USER_CARDS, SET_GAME_STARTER } from "./game/gameTypes";
 
 export const setUserCards = (cards: ICard[]) => ({
 	type: SET_USER_CARDS,
@@ -23,4 +23,13 @@ export const setBitoCards = (cards: ICard[]) => ({
 export const setGameTrump = (trump: ICard) => ({
 	type: SET_GAME_TRUMP,
 	payload: trump
+})
+export const setGameStarter = (value: string) => ({
+	type: SET_GAME_STARTER,
+	payload: value
+})
+
+export const setInTableCards = (cards: string) => ({
+	type: SET_GAME_TRUMP,
+	payload: cards
 })

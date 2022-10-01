@@ -9,7 +9,34 @@
     >.section {
         height: 125px;
         display: flex;
-        gap: 2px;
+        gap: 1px;
         flex-direction: row;
+        position: relative;
+        align-items: center;
+        .btnCard {
+            margin: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+        }
+        >button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-left: 40px;
+            cursor: pointer;
+            background: none;
+            color: #07692e;
+            background: whitesmoke;
+            // border: 1px solid #5450ff;
+            outline: none;
+            border: none;
+            box-shadow: 0 0 15px #07692e;
+            font-size: 18px;
+            transition: all .5s;
+            &:hover {
+                background: rgb(210, 255, 220);
+            }
+        }
     }
 }

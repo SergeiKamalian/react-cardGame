@@ -6,31 +6,26 @@
     justify-content: space-between;
     align-items: center;
     >.SectionTrumps {
-        width: 150px;
-        // height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 1px solid white;
+        // border: 1px solid white;
         >.Card {
             position: absolute;
-            left:7.3%;
-            z-index: 10;
         }
         >.backCard {
             transform: rotate(90deg);
             position: relative;
-            // bottom: 18px;
-            top: 27px;
-            margin-right: 23px;
+            top: 20px;
             z-index: 15;
         }
+        // .trumpCard {
+        //     position: absolute;
+        // }
     }
 
     >.SectionBito {
-        // width: 150px;
-        // height: 200px;
-        border: 1px solid white;
+        // border: 1px solid white;
     }
 
     >.sectionFight {
@@ -56,7 +51,6 @@
                 left: 25px;
                 top: 5px;
                 transform: rotate(5deg);
-                // bottom: 50px;
             }
         }
     }
