@@ -1,27 +1,42 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { ICard, ICardProps } from "../../model"
 import '../../images/6-heart.png'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { useDispatch } from 'react-redux'
-import { setAllCards, setInTableCards } from '../../redux/features/actions'
-import {useCallback} from 'react'
+import { useCallback } from 'react'
+import { setInTableCards, setUserCards } from '../../redux/features/actions'
 
 const Card: FC<ICardProps> = ({ card, isBack }) => {
 
     const { inTableCards } = useSelector((state: RootState) => state.inGameReducer)
+    const { userCards } = useSelector((state: RootState) => state.gameReducer)
     const dispatch = useDispatch()
-    const setInTableCardsFnc = useCallback(() => {
+    // useEffect(() => {
+    //     console.log(card?.cardName);
+    // }, [userCards])
 
-            const cloneInTableCards = inTableCards;
-            const arr: ICard[] = [];
-            {card && arr.push(card)}
-    }, [card, inTableCards])
+    const setInTableCardsFnc = useCallback(() => {
+        let cloneInTableCards = inTableCards;
+        const arr: ICard[] = [];
+        { card && arr.push(card) }
+        if (!cloneInTableCards.length ||
+            cloneInTableCards.some((cloneCard) => cloneCard[0]?.value === card?.value || cloneCard[1]?.value === card?.value)
+        ) {
+            cloneInTableCards.push(arr)
+            dispatch(setInTableCards(cloneInTableCards))
+            const cloneUserCards = userCards.filter((userCard) => userCard.id !== card?.id)
+            dispatch(setUserCards(cloneUserCards))
+        }else {
+            alert('На столе нет карт с таким значением')
+        }
+
+    }, [card, inTableCards, dispatch, userCards])
     return (
         <>
-            {isBack
-                ? <img className='Card' src={require(`../../images/cardBack.png`)}></img>
-                : <img className='Card pointer' onClick={setInTableCardsFnc} src={require(`../../images/${card!.cardName}.png`)}></img>}
+            {card && <img className={!isBack ? 'Card pointer' : 'Card'} onClick={!isBack ? setInTableCardsFnc : undefined} src={isBack
+                ? require(`../../images/cardBack.png`)
+                : require(`../../images/${card?.cardName}.png`)}></img>}
         </>
     )
 }

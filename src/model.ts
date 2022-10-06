@@ -18,7 +18,7 @@ export interface IGameReducerState {
     gameStart: string
 }
 export interface IInGameTable {
-    inTableCards: string
+    inTableCards: ICard[][]
 }
 export enum GAME_VALUES {
     START_STEP_COMPUTER= 'START_STEP_COMPUTER',

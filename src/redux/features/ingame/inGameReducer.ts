@@ -3,7 +3,7 @@ import { SET_INTABLE_CARDS } from "./inGameTypes";
 
 
 const INITIAL_STATE: IInGameTable = {
-    inTableCards: '',
+    inTableCards: [],
 };
 
 const inGameReducer = (state = INITIAL_STATE, action: { type: string; payload: ICard[][] | string }) => {
@@ -12,7 +12,7 @@ const inGameReducer = (state = INITIAL_STATE, action: { type: string; payload: I
         case SET_INTABLE_CARDS:
             return {
                 ...state,
-                inTableCards: action.payload as string,
+                inTableCards: action.payload as ICard[][],
             };
         default:
             return state;

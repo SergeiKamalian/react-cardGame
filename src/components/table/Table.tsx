@@ -23,9 +23,8 @@ const Table = () => {
     const rand = Math.floor(Math.random() * allCards.length);
     const gameTrumpEl = allCards[rand]
     allCards.splice(rand, 1)
-
-    dispatch(setGameTrump(gameTrumpEl))
-    dispatch(setAllCards(allCards))
+      dispatch(setGameTrump(gameTrumpEl))
+      dispatch(setAllCards(allCards))
   }, [allCards, dispatch])
 
   const getCards = useCallback((dispatchValue: string) => {
@@ -53,15 +52,15 @@ const Table = () => {
   }, [allCards, dispatch])
 
   useEffect(() => {
-    getGameTrump()
     getCards('user')
     getCards('computer')
+    getGameTrump()
     dispatch(setAllCards(randomArr(allCards)))
   }, [allCards, dispatch, getCards, getGameTrump])
 
   useEffect(() => {
     dispatch(setGameStarter(decideAttacker(userCards, computerCards, gameTrump)!))
-  }, [computerCards, dispatch, gameTrump, userCards])
+  }, [dispatch, gameTrump])
 
 
   return (

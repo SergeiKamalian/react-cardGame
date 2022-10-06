@@ -7,24 +7,18 @@ export const decideAttacker = (userCards: ICard[], compCards: ICard[], gameTrump
     if (smallCompTrump?.value && smallUserTrump?.value) {
 
         if (smallCompTrump?.value > smallUserTrump?.value) {
-            console.log('начинает юзер');
             return GAME_VALUES.START_STEP_USER
         } else if (smallCompTrump?.value < smallUserTrump?.value) {
-            console.log('начинает комп');
             return GAME_VALUES.START_STEP_COMPUTER
         }
     } else if (smallCompTrump?.value || smallUserTrump?.value) {
 
         if (smallCompTrump?.value && !smallUserTrump?.value) {
-            console.log('начинает комп потому что у юзера нема козыра');
             return GAME_VALUES.START_STEP_COMPUTER
         } else if (!smallCompTrump?.value && smallUserTrump?.value) {
-            console.log('начинает юзер потому что у компа нема козыра');
 
             return GAME_VALUES.START_STEP_USER
         }
-    } else {
-        console.log('nothing');
     }
 }
 

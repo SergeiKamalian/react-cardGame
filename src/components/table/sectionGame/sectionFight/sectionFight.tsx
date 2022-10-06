@@ -1,18 +1,18 @@
-import React from 'react'
-
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../../redux/store'
 const SectionFight = () => {
+
+    const { inTableCards } = useSelector((state: RootState) => state.inGameReducer)
+
     return (
         <div className='sectionFight'>
-            <div className="option">
-                <img className='Card' src={require(`../../../../images/Q-spade.png`)}></img>
-                <img className='Card Cardtwo' src={require(`../../../../images/A-spade.png`)}></img>
-            </div>
-            <div className="option">
-                <img className='Card' src={require(`../../../../images/Q-spade.png`)}></img>
-                <img className='Card Cardtwo' src={require(`../../../../images/A-spade.png`)}></img>
-            </div>
+            {inTableCards.map((cardsArr) =>
+                <div className="option" key={cardsArr[0]?.cardName + cardsArr[1]?.cardName}>
+                    <img className='Card' src={require(`../../../../images/${cardsArr[0]?.cardName}.png`)}></img>
+                    {cardsArr.length > 1 && <img className='Card Cardtwo' src={require(`../../../../images/${cardsArr[1]?.cardName}.png`)}></img>}
+                </div>
+            )}
         </div>
     )
 }
-
 export default SectionFight
