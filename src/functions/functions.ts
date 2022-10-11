@@ -59,3 +59,53 @@ export const randomArr = (array: ICard[]) => {
 
     return array;
 }
+export const getMinCloseCard = (array: ICard[], trump: ICard | null, inTableCardArr: ICard[]) => {
+    let minItems = array.filter((arrItem) => arrItem.trump === inTableCardArr[0].trump)
+    let minCard: ICard;
+    if (minItems.length) {
+        minCard = minItems.reduce((previous, current) => {
+            return current.value < previous.value ? current : previous;
+        });
+    } else {
+        minCard = array.reduce((previous, current) => {
+            return current.value < previous.value ? current : previous;
+        });
+    }
+    return minCard;
+}
+export const sortCardsFnc = (arr: ICard[]) => {
+    return arr.sort(function (a, b) {
+        var textA = a.trump.toUpperCase();
+        var textB = b.trump.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
+}
+
+export const getNewCards = (array: ICard[], allCards: ICard[], gameTrump: ICard | null) => {
+    // let noBitoCards: ICard[] = []
+    // if (allCards && gameTrump) {
+    //     noBitoCards = [gameTrump, ...allCards]
+    // }
+    // for (let i = 0; i < noBitoCards.length; i++) {
+    //     if (array.length < 6) {
+    //         const card = noBitoCards.pop() 
+    //         card && array.push(card)
+    //     }
+    // }
+    // console.log(array);
+    // console.log(noBitoCards );
+    
+    
+    if (allCards) {
+        for (let i = 0; i < allCards.length; i++) {
+            if (array.length < 6) {
+                const newUserCard = allCards.pop()
+                newUserCard && array.push(newUserCard)
+                if (allCards.length < 1) {
+                    gameTrump && array.push(gameTrump)
+                }
+            }
+        }
+    }
+    return array;
+}

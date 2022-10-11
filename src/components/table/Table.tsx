@@ -10,7 +10,7 @@ import { setAllCards } from '../../redux/features/actions'
 import { setUserCards } from '../../redux/features/actions'
 import { setComputerCards } from '../../redux/features/actions'
 import { ICard } from '../../model'
-import { decideAttacker, randomArr } from '../../functions/functions'
+import { decideAttacker, randomArr, sortCardsFnc } from '../../functions/functions'
 
 const Table = () => {
   const dispatch = useDispatch();
@@ -35,11 +35,7 @@ const Table = () => {
         const cardEl = allCards[rand]
         cardsArr.push(cardEl)
         allCards.splice(rand, 1)
-        cardsArr.sort(function (a, b) {
-          var textA = a.trump.toUpperCase();
-          var textB = b.trump.toUpperCase();
-          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-        });
+        sortCardsFnc(cardsArr)
       }
     })
     if (dispatchValue === 'user') {

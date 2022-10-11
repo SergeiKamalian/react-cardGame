@@ -5,27 +5,37 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
     >.SectionTrumps {
         display: flex;
         justify-content: center;
         align-items: center;
+
         // border: 1px solid white;
         >.Card {
             position: absolute;
         }
+
         >.backCard {
             transform: rotate(90deg);
             position: relative;
             top: 20px;
             z-index: 15;
         }
-        // .trumpCard {
-        //     position: absolute;
-        // }
-    }
 
-    >.SectionBito {
-        // border: 1px solid white;
+        .trumpCard {
+            background-image: url('../../../images/cardBack.png');
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            >span {
+                transform: rotate(-90deg);
+                color: black;
+                font-size: 20px;
+            }
+        }
     }
 
     >.sectionFight {
@@ -37,15 +47,18 @@
         gap: 16px;
         align-items: center;
         position: relative;
+
         // border: 1px solid white;
         >.option {
             width: 120px;
             height: 135px;
             position: relative;
+
             // border: 1px solid white;
             >.Card {
                 position: absolute;
             }
+
             >.Cardtwo {
                 position: absolute;
                 left: 25px;
@@ -53,5 +66,11 @@
                 transform: rotate(5deg);
             }
         }
+    }
+
+    >.SectionBito {
+        width: 162px;
+        height: 210px;
+        color: #07692e;
     }
 }

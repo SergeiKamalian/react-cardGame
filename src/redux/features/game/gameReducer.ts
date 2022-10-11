@@ -1,11 +1,11 @@
 import { ICard, IGameReducerState } from "../../../model";
-import { SET_COMPUTER_CARDS, SET_GAME_STARTER, SET_GAME_TRUMP, SET_USER_CARDS } from "./gameTypes";
+import { SET_BITO_CARDS, SET_COMPUTER_CARDS, SET_GAME_STARTER, SET_GAME_TRUMP, SET_USER_CARDS } from "./gameTypes";
 
 
 const INITIAL_STATE: IGameReducerState = {
     userCards: [],
     computerCards: [],
-    noBitoCards: [],
+    bitoCards: [],
     gameTrump: null,
     gameStart: '',
 };
@@ -33,6 +33,12 @@ const gameReducer = (state = INITIAL_STATE, action: { type: string; payload: ICa
             return {
                 ...state,
                 gameStart: action.payload as string,
+            };
+
+        case SET_BITO_CARDS:
+            return {
+                ...state,
+                bitoCards: action.payload as ICard[],
             };
 
         default:

@@ -13,12 +13,15 @@ export interface ICardProps {
 export interface IGameReducerState {
     userCards: ICard[],
     computerCards: ICard[],
-    noBitoCards: ICard[],
+    bitoCards: ICard[],
     gameTrump: ICard | null,
     gameStart: string
 }
 export interface IInGameTable {
-    inTableCards: ICard[][]
+    inTableCards: ICard[][],
+    computerState: string,
+    userState: string,
+    compComment: boolean
 }
 export enum GAME_VALUES {
     START_STEP_COMPUTER= 'START_STEP_COMPUTER',

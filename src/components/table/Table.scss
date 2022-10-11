@@ -6,24 +6,32 @@
     align-items: center;
     justify-content: space-between;
 
-    >.section {
-        height: 125px;
+    .mainUser {
         display: flex;
-        gap: 1px;
-        flex-direction: row;
-        position: relative;
+        flex-direction: column;
+        justify-content: space-between;
         align-items: center;
-        .btnCard {
-            margin: 0;
-            padding: 0;
-            border: none;
-            outline: none;
+        gap: 7px;
+
+        >.section {
+            height: 125px;
+            display: flex;
+            gap: 1px;
+            flex-direction: row;
+            position: relative;
+            align-items: center;
+            .btnCard {
+                margin: 0;
+                padding: 0;
+                border: none;
+                outline: none;
+            }
         }
+
         >button {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            margin-left: 40px;
+            width: 100px;
+            height: 30px;
+            border-radius: 6px;
             cursor: pointer;
             background: none;
             color: #07692e;
@@ -34,9 +42,42 @@
             box-shadow: 0 0 15px #07692e;
             font-size: 18px;
             transition: all .5s;
+
             &:hover {
                 background: rgb(210, 255, 220);
             }
         }
+
+        >.compComment {
+            width: 120px;
+            height: 30px;
+            
+            >div {
+                color: #07692e;
+                background: whitesmoke;
+                box-shadow: 0 0 15px #07692e;
+                font-size: 18px;
+                transition: all .1s;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                animation-name: commentAnim;
+                animation-duration: .1s;
+                border-radius: 6px;
+            }
+        }
+    }
+}
+
+@keyframes commentAnim {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
     }
 }

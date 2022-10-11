@@ -1,11 +1,13 @@
-import React from 'react'
-import Card from '../../../card/Card'
+import { useSelector } from "react-redux"
+import { RootState } from "../../../../redux/store"
 
 const SectionBito = () => {
-    const arr = [1, 2, 3, 4, 5]
+    const { bitoCards } = useSelector((state: RootState) => state.gameReducer)
     return (
         <div className='SectionBito'>
-            <img src={require(`../../../../images/bitoCards.png`)} />
+            {bitoCards.length &&
+                <img src={require(`../../../../images/bitoCards.png`)} />
+            }
         </div>
     )
 }
