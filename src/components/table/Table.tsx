@@ -5,7 +5,7 @@ import { useCallback, useEffect } from 'react'
 import SectionComputer from './sectionComputer/SectionComputer'
 import SectionGame from './sectionGame/SectionGame'
 import SectionUser from './sectionUser/SectionUser'
-import { setGameStarter, setGameTrump } from '../../redux/features/actions'
+import { setComputerState, setGameStarter, setGameTrump, setUserState } from '../../redux/features/actions'
 import { setAllCards } from '../../redux/features/actions'
 import { setUserCards } from '../../redux/features/actions'
 import { setComputerCards } from '../../redux/features/actions'
@@ -18,13 +18,14 @@ const Table = () => {
   const { userCards } = useSelector((state: RootState) => state.gameReducer);
   const { computerCards } = useSelector((state: RootState) => state.gameReducer);
   const { gameTrump } = useSelector((state: RootState) => state.gameReducer);
+  const { gameStart } = useSelector((state: RootState) => state.gameReducer);
 
   const getGameTrump = useCallback(() => {
     const rand = Math.floor(Math.random() * allCards.length);
     const gameTrumpEl = allCards[rand]
     allCards.splice(rand, 1)
-      dispatch(setGameTrump(gameTrumpEl))
-      dispatch(setAllCards(allCards))
+    dispatch(setGameTrump(gameTrumpEl))
+    dispatch(setAllCards(allCards))
   }, [allCards, dispatch])
 
   const getCards = useCallback((dispatchValue: string) => {
@@ -58,6 +59,16 @@ const Table = () => {
     dispatch(setGameStarter(decideAttacker(userCards, computerCards, gameTrump)!))
   }, [dispatch, gameTrump])
 
+  useEffect(() => {
+    console.log(gameStart);
+    if (gameStart === 'START_STEP_USER') {
+      dispatch(setUserState('attacking'));
+      dispatch(setComputerState('protecting-ok'))
+    } else if (gameStart === 'START_STEP_COMPUTER') {
+      dispatch(setComputerState('attacking'));
+      dispatch(setUserState('protecting-ok'))
+    }
+  }, [gameStart])
 
   return (
     <div className='Table'>

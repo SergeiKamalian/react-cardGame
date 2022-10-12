@@ -81,21 +81,7 @@ export const sortCardsFnc = (arr: ICard[]) => {
     });
 }
 
-export const getNewCards = (array: ICard[], allCards: ICard[], gameTrump: ICard | null) => {
-    // let noBitoCards: ICard[] = []
-    // if (allCards && gameTrump) {
-    //     noBitoCards = [gameTrump, ...allCards]
-    // }
-    // for (let i = 0; i < noBitoCards.length; i++) {
-    //     if (array.length < 6) {
-    //         const card = noBitoCards.pop() 
-    //         card && array.push(card)
-    //     }
-    // }
-    // console.log(array);
-    // console.log(noBitoCards );
-    
-    
+export const getNewCards = (array: ICard[], allCards: ICard[], gameTrump: ICard | null) => {    
     if (allCards) {
         for (let i = 0; i < allCards.length; i++) {
             if (array.length < 6) {
@@ -108,4 +94,15 @@ export const getNewCards = (array: ICard[], allCards: ICard[], gameTrump: ICard 
         }
     }
     return array;
+}
+
+export const attackMinCompCard = (array: ICard[], gameTrump: ICard | null) => {
+    array = array.filter((item) => item.trump !== gameTrump?.trump)
+    let minCard: ICard | null = null;
+    if (array.length) {
+        minCard = array.reduce((previous, current) => {
+            return current.value < previous.value ? current : previous;
+        });
+    }
+    return minCard
 }

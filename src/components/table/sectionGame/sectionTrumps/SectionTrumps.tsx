@@ -7,7 +7,7 @@ const SectionTrumps = () => {
     const { allCards } = useSelector((state: RootState) => state.cards)
     // console.log(allCards);
     useEffect(() => {
-        console.log(allCards);
+        // console.log(allCards);
         
     }, [allCards])
     return (

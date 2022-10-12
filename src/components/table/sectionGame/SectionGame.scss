@@ -59,11 +59,16 @@
                 position: absolute;
             }
 
+            >.Cardone {
+                animation-duration: .3s;
+            }
+
             >.Cardtwo {
                 position: absolute;
                 left: 25px;
                 top: 5px;
                 transform: rotate(5deg);
+                animation-duration: .3s;
             }
         }
     }
@@ -72,5 +77,63 @@
         width: 162px;
         height: 210px;
         color: #07692e;
+    }
+}
+
+@keyframes userAnim {
+    0% {
+        position: absolute;
+        left: 100%;
+        transform: scale(1) translatey(130px);
+        opacity: 0;
+        // transform: rotate(5deg);
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+
+        transform: scale(1) rotate(5deg);
+        opacity: 1;
+    }
+}
+
+@keyframes compAnim {
+    0% {
+        position: absolute;
+        left: 100%;
+        transform: scale(1) translatey(-130px);
+        opacity: 0;
+        // transform: rotate(5deg);
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+
+        transform: scale(1) rotate(5deg);
+        opacity: 1;
+    }
+}
+
+@keyframes anim {
+    0% {
+        // position: absolute;
+        // left: 100%;
+        // transform: scale(1) translatey(-130px) ;
+        // transform: translateY(50px);
+        opacity: 0;
+        // transform: rotate(5deg);
+    }
+
+    100% {
+
+        // transform: scale(1) rotate(5deg);
+        transform: translateY(0px);
+        opacity: 1;
     }
 }

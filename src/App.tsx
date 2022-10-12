@@ -3,16 +3,20 @@ import { RootState } from './redux/store';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import './styles/index.scss'
 import Table from './components/table/Table';
+import { useCallback, useState } from 'react';
 function App() {
-
-  
-  const {allCards} = useSelector((state: RootState) => state.cards)
-
+  const [startGame, setStartGame] = useState(true)
+  const startGameFnc = useCallback(() => {
+    setStartGame(true);
+  }, [])
 
   return (
     <div className="App">
-      {/* {allCards.map((card) => <Card card={card} key={card.id} />)} */}
-      <Table />
+      {!startGame && <div>
+        <span>Durak Game</span>
+        <button onClick={startGameFnc}>Начать игру</button>
+      </div>}
+      {startGame && <Table />}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { ICard } from "../../model";
 import { SET_ALL_CARDS } from "./cards/cardsTypes";
 import { SET_BITO_CARDS, SET_COMPUTER_CARDS, SET_GAME_TRUMP, SET_USER_CARDS, SET_GAME_STARTER, SET_INTABLE_CARDS } from "./game/gameTypes";
-import { SET_COMPUTER_STATE, SET_COMP_COMMENT } from "./ingame/inGameTypes";
+import { SET_CLICKD_CARD, SET_CLICKED_USER_CARD, SET_COMPUTER_STATE, SET_COMP_COMMENT, SET_USER_STATE } from "./ingame/inGameTypes";
 
 export const setUserCards = (cards: ICard[]) => ({
 	type: SET_USER_CARDS,
@@ -39,7 +39,19 @@ export const setComputerState = (state: string) => ({
 	type: SET_COMPUTER_STATE,
 	payload: state
 })
+export const setUserState = (state: string) => ({
+	type: SET_USER_STATE,
+	payload: state
+})
 export const setCompComment = (bool: boolean) => ({
 	type: SET_COMP_COMMENT,
 	payload: bool
+})
+export const setClickedCard = (card: ICard) => ({
+	type: SET_CLICKD_CARD,
+	payload: card
+})
+export const setUserClickedCard = (card: ICard) => ({
+	type: SET_CLICKED_USER_CARD,
+	payload: card
 })
