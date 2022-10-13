@@ -1,4 +1,5 @@
 import { ICard } from "../../../model";
+import { SET_GAME_WIN } from "../game/gameTypes";
 import { SET_ALL_CARDS } from "./cardsTypes";
 
 
@@ -48,7 +49,7 @@ const INITIAL_STATE = {
     allCards: allCards
 };
 
-const cards = (state = INITIAL_STATE, action: { type: string; payload: ICard[] }) => {
+const cards = (state = INITIAL_STATE, action: { type: string; payload: ICard[] | string }) => {
     switch (action.type) {
         case SET_ALL_CARDS:
             return {

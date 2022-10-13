@@ -1,4 +1,5 @@
 import { ICard, IInGameTable } from "../../../model";
+import { SET_GAME_WIN } from "../game/gameTypes";
 import { SET_CLICKD_CARD, SET_CLICKED_USER_CARD, SET_COMPUTER_STATE, SET_COMP_COMMENT, SET_INTABLE_CARDS, SET_USER_STATE } from "./inGameTypes";
 
 
@@ -8,7 +9,8 @@ const INITIAL_STATE: IInGameTable = {
     computerState: '',
     compComment: false,
     clickedTableCard: null,
-    clickedUserCard: null
+    clickedUserCard: null,
+    win: null
 };
 
 const inGameReducer = (state = INITIAL_STATE, action: { type: string; payload: ICard[][] | string | boolean | ICard }) => {

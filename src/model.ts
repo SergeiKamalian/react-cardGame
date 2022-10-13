@@ -24,8 +24,9 @@ export interface IInGameTable {
     compComment: boolean
     clickedTableCard: ICard | null
     clickedUserCard: ICard | null
+    win: string | null
 }
 export enum GAME_VALUES {
-    START_STEP_COMPUTER= 'START_STEP_COMPUTER',
-    START_STEP_USER='START_STEP_USER'
+    START_STEP_COMPUTER = 'START_STEP_COMPUTER',
+    START_STEP_USER = 'START_STEP_USER'
 }

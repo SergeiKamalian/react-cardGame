@@ -6,11 +6,36 @@
     align-items: center;
     justify-content: space-between;
 
+    .Win {
+        width: 100%;
+        height: 100vh;
+        background: rgba($color: #07692e, $alpha: .3);
+        position: absolute;
+        z-index: 100;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // opacity: .3;
+        color: white;
+        animation-name: winPage;
+        animation-duration: .5s;
+        user-select: none;
+
+        >span {
+            font-size: 70px;
+            text-shadow: 0 0 10px #00240e;
+            animation-name: winPageSpan;
+            animation: .5s;
+        }
+    }
+
+
     .mainUser {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        height: 162px;
         gap: 7px;
 
         >.section {
@@ -20,6 +45,7 @@
             flex-direction: row;
             position: relative;
             align-items: center;
+
             .btnCard {
                 margin: 0;
                 padding: 0;
@@ -49,9 +75,9 @@
         }
 
         >.compComment {
-            width: 120px;
+            width: 100px;
             height: 30px;
-            
+
             >div {
                 color: #07692e;
                 background: whitesmoke;
@@ -76,8 +102,30 @@
         opacity: 0;
         transform: translateY(-30px);
     }
+
     100% {
         opacity: 1;
         transform: translateX(0px);
+    }
+}
+
+@keyframes winPage {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes winPageSpan {
+    0% {
+        opacity: 0;
+        transform: scale(.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
     }
 }

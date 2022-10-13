@@ -5,7 +5,7 @@ import './styles/index.scss'
 import Table from './components/table/Table';
 import { useCallback, useState } from 'react';
 function App() {
-  const [startGame, setStartGame] = useState(true)
+  const [startGame, setStartGame] = useState(false)
   const startGameFnc = useCallback(() => {
     setStartGame(true);
   }, [])

@@ -1,29 +1,25 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { ICard } from '../../../../model'
-import { setClickedCard, setUserCards } from '../../../../redux/features/actions'
+import { useEffect } from 'react'
+import { setClickedCard, setGameWin, setUserCards, setUserClickedCard } from '../../../../redux/features/actions'
 import { RootState } from '../../../../redux/store'
 const SectionFight = () => {
 
     const { inTableCards } = useSelector((state: RootState) => state.inGameReducer)
     const { userState } = useSelector((state: RootState) => state.inGameReducer)
-    const { clickedTableCard } = useSelector((state: RootState) => state.inGameReducer)
     const { clickedUserCard } = useSelector((state: RootState) => state.inGameReducer)
     const { gameTrump } = useSelector((state: RootState) => state.gameReducer)
+    const { allCards } = useSelector((state: RootState) => state.cards)
     const { userCards } = useSelector((state: RootState) => state.gameReducer)
+    const { computerCards } = useSelector((state: RootState) => state.gameReducer)
     const dispatch = useDispatch()
     const findCard = (card: ICard) => {
-        const cloneInTableCards = inTableCards;
-        // console.log(cloneInTableCards);
+        const cloneInTableCards = [...inTableCards];
 
         if (userState !== 'attacking') {
-            // console.log(card);
-
 
             cloneInTableCards.map((cardArr) => {
                 if (cardArr.length === 1) {
-
-                    // console.log(cardArr);
-
                     dispatch(setClickedCard(card))
                     if (
                         (card.trump === clickedUserCard?.trump && card.value < clickedUserCard?.value) ||
@@ -34,15 +30,22 @@ const SectionFight = () => {
                                 clickedUserCard && inTableCard.push(clickedUserCard)
                                 const cloneUserCards = userCards.filter((userCard) => userCard.id !== clickedUserCard?.id)
                                 dispatch(setUserCards(cloneUserCards))
+                                dispatch(setUserClickedCard(null))
+                                dispatch(setClickedCard(null))
                             }
                         })
                     } else {
-                        alert('Нельзя обманывать')
+                        if (clickedUserCard) {
+                            alert('Нельзя обманывать')
+                        } else {
+                            alert('Выбери карту')
+                        }
                     }
                 }
             })
         }
     }
+
     return (
         <div className='sectionFight'>
             {inTableCards.map((cardsArr) =>

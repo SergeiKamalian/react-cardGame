@@ -11,6 +11,7 @@ import { setUserCards } from '../../redux/features/actions'
 import { setComputerCards } from '../../redux/features/actions'
 import { ICard } from '../../model'
 import { decideAttacker, randomArr, sortCardsFnc } from '../../functions/functions'
+import Win from './Win'
 
 const Table = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,8 @@ const Table = () => {
   const { computerCards } = useSelector((state: RootState) => state.gameReducer);
   const { gameTrump } = useSelector((state: RootState) => state.gameReducer);
   const { gameStart } = useSelector((state: RootState) => state.gameReducer);
+  const { win } = useSelector((state: RootState) => state.inGameReducer);
+
 
   const getGameTrump = useCallback(() => {
     const rand = Math.floor(Math.random() * allCards.length);
@@ -72,9 +75,12 @@ const Table = () => {
 
   return (
     <div className='Table'>
-      <SectionComputer />
-      <SectionGame />
-      <SectionUser />
+      <Win />
+      <>
+        <SectionComputer />
+        <SectionGame />
+        <SectionUser />
+      </>
     </div>
   )
 }

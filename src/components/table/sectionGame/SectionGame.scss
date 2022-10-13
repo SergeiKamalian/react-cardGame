@@ -10,6 +10,19 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-left: 5%;
+
+        >.gameTrumpImg {
+            position: absolute;
+            width: 90px;
+            height: 125px;
+            border: 1px solid rgb(70, 70, 70);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba($color: black, $alpha: .1);
+        }
+        >.gameTrumpIcon {
+            transform: scale(.8);
+        }
 
         // border: 1px solid white;
         >.Card {

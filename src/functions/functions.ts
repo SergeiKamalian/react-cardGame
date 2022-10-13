@@ -22,11 +22,6 @@ export const decideAttacker = (userCards: ICard[], compCards: ICard[], gameTrump
     }
 }
 
-export const decideAttackerInMoment = () => {
-
-}
-
-
 export const setUserAndCompCards = (allCards: ICard[], trump: ICard | null) => {
 
     allCards = allCards.filter((card) => card.id !== trump?.id)
@@ -81,15 +76,17 @@ export const sortCardsFnc = (arr: ICard[]) => {
     });
 }
 
-export const getNewCards = (array: ICard[], allCards: ICard[], gameTrump: ICard | null) => {    
-    if (allCards) {
-        for (let i = 0; i < allCards.length; i++) {
+export const getNewCards = (array: ICard[], allCards: ICard[], gameTrump: ICard | null) => {
+    // gameTrump && array.push(gameTrump)
+
+    if (array.length < 6) {
+        if (!allCards.find((card) => card.id === gameTrump?.id) && allCards.length > 0) {
+            gameTrump && allCards.unshift(gameTrump)
+        }
+        for (let i = 0; i < 24; i++) {
             if (array.length < 6) {
-                const newUserCard = allCards.pop()
-                newUserCard && array.push(newUserCard)
-                if (allCards.length < 1) {
-                    gameTrump && array.push(gameTrump)
-                }
+                const newCard = allCards.pop()
+                newCard && array.push(newCard)
             }
         }
     }
@@ -97,12 +94,19 @@ export const getNewCards = (array: ICard[], allCards: ICard[], gameTrump: ICard 
 }
 
 export const attackMinCompCard = (array: ICard[], gameTrump: ICard | null) => {
+    const allArray = array;
     array = array.filter((item) => item.trump !== gameTrump?.trump)
     let minCard: ICard | null = null;
-    if (array.length) {
-        minCard = array.reduce((previous, current) => {
-            return current.value < previous.value ? current : previous;
-        });
+    if (allArray.length) {
+        if (array.length) {
+            minCard = array.reduce((previous, current) => {
+                return current.value < previous.value ? current : previous;
+            });
+        } else {
+            minCard = allArray.reduce((previous, current) => {
+                return current.value < previous.value ? current : previous;
+            });
+        }
     }
     return minCard
 }

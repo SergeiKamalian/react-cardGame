@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 import Card from '../../card/Card';
 import { getNewCards, sortCardsFnc } from '../../../functions/functions';
 import { useDispatch } from 'react-redux';
-import { setBitoCards, setCompComment, setComputerCards, setComputerState, setInTableCards, setUserCards } from '../../../redux/features/actions';
+import { setBitoCards, setCompComment, setComputerCards, setComputerState, setInTableCards, setUserCards, setUserState } from '../../../redux/features/actions';
 
 const SectionUser = () => {
     const { userCards } = useSelector((state: RootState) => state.gameReducer);
@@ -13,7 +13,7 @@ const SectionUser = () => {
     const { computerCards } = useSelector((state: RootState) => state.gameReducer);
     const { allCards } = useSelector((state: RootState) => state.cards);
     const { bitoCards } = useSelector((state: RootState) => state.gameReducer)
-    const {gameTrump} = useSelector((state: RootState) => state.gameReducer)
+    const { gameTrump } = useSelector((state: RootState) => state.gameReducer)
     const dispatch = useDispatch()
 
     const takeComputer = () => {
@@ -33,8 +33,8 @@ const SectionUser = () => {
             }
         }
 
-       const finishUserCards =  getNewCards(newUserCards, newAllCards, gameTrump)
-       
+        const finishUserCards = getNewCards(newUserCards, newAllCards, gameTrump)
+
 
         dispatch(setComputerCards(sortCardsFnc(newCompCards)))
         dispatch(setUserCards(sortCardsFnc(finishUserCards)))
@@ -56,8 +56,8 @@ const SectionUser = () => {
             })
         })
 
-        const finishUserCards =  getNewCards(newUserCards, newAllCards, gameTrump)
-        const finishCompCards =  getNewCards(newCompCards, newAllCards, gameTrump)
+        const finishUserCards = getNewCards(newUserCards, newAllCards, gameTrump)
+        const finishCompCards = getNewCards(newCompCards, newAllCards, gameTrump)
 
 
         dispatch(setInTableCards([]))
@@ -66,10 +66,29 @@ const SectionUser = () => {
         dispatch(setComputerCards(sortCardsFnc(finishCompCards)))
     }
 
+    const takeUser = () => {
+        const cloneInTableCards = inTableCards;
+        const newAllCards = allCards;
+        const newCompCards = computerCards;
+        const cloneUserCards = userCards
+        cloneInTableCards.forEach((cloneInTableCard) => {
+            cloneInTableCard.forEach((card) => {
+                cloneUserCards.push(card)
+            })
+        })
+        const finishCompCards = getNewCards(newCompCards, newAllCards, gameTrump)
+        dispatch(setCompComment(false))
+        dispatch(setUserCards(cloneUserCards));
+        dispatch(setInTableCards([]));
+        dispatch(setComputerCards(finishCompCards))
+    }
+
     const handleClick = () => {
         if (computerState === 'protecting-ok' && userState === 'attacking') {
-            if (!inTableCards.find((item) => item.length === 1)) {
+            if (!inTableCards.find((item) => item.length === 1) && inTableCards.length) {
                 bitoCardsFnc()
+                dispatch(setUserState('protecting-ok'))
+                dispatch(setComputerState('attacking'))
             } else {
                 console.log('Подожди');
             }
@@ -77,7 +96,22 @@ const SectionUser = () => {
         } else if (computerState === 'protecting-no' && userState === 'attacking') {
             console.log('логика бери');
             takeComputer()
+        } else if (computerState === 'attacking') {
+            console.log('Я беру');
+            takeUser()
         }
+    }
+
+    const userComFnc = () => {
+        let com = '';
+        if (userState === 'attacking' && computerState === 'protecting-ok') {
+            com = 'Бито'
+        } else if (userState === 'attacking' && computerState === 'protecting-no') {
+            com = 'Бери'
+        } else if (userState !== 'attacking') {
+            com = 'Беру'
+        }
+        return com;
     }
 
     return (
@@ -87,9 +121,12 @@ const SectionUser = () => {
                     <Card card={card} isBack={false} index={index} key={card.id} />
                 )}
             </div>
-            <button onClick={handleClick}>
-                {userState === 'attacking' && computerState === 'protecting-ok' ? 'Бито' : 'Бери'}
-            </button>
+            {inTableCards.length ?
+                <button onClick={handleClick}>
+                    {userComFnc()}
+                </button>
+                : ''
+            }
         </div>
     )
 }
